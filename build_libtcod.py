@@ -74,7 +74,6 @@ include_dirs = [
     'libtcod/src/png/',
     'libtcod/src/zlib/',
     '/usr/include/SDL2/',
-    'tcod/freetype2/include',
 ]
 
 extra_parse_args = []
@@ -139,6 +138,8 @@ for ft_source in FREETYPE_SOURCES:
 define_macros.append(('FT2_BUILD_LIBRARY', None))
 define_macros.append(('FT_CONFIG_OPTIONS_H', '<tcod/ftoption.h>'))
 define_macros.append(('FT_CONFIG_MODULES_H', '<tcod/ftmodule.h>'))
+
+include_dirs.append('dependencies/freetype2/include')
 # ---
 
 if sys.platform == 'win32':
