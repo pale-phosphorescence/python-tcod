@@ -134,7 +134,7 @@ FREETYPE_SOURCES = [
 ]
 
 for ft_source in FREETYPE_SOURCES:
-    sources.append(os.path.join('tcod/freetype2', ft_source))
+    sources.append(os.path.join('dependencies/freetype2', ft_source))
 
 define_macros.append(('FT2_BUILD_LIBRARY', None))
 define_macros.append(('FT_CONFIG_OPTIONS_H', '<tcod/ftoption.h>'))
