@@ -74,6 +74,7 @@ include_dirs = [
     'libtcod/src/png/',
     'libtcod/src/zlib/',
     '/usr/include/SDL2/',
+    'tcod/freetype2/include',
 ]
 
 extra_parse_args = []
@@ -90,8 +91,55 @@ libraries = []
 library_dirs = []
 define_macros = []
 
-sources += walk_sources('tcod/')
-sources += walk_sources('tdl/')
+sources += find_sources('tcod/')
+sources += find_sources('tdl/')
+
+# --- add freetype modules ---
+FREETYPE_SOURCES = [
+    'src/base/ftsystem.c',
+
+    'src/base/ftinit.c',
+    'src/base/ftdebug.c',
+    'src/base/ftbase.c',
+
+    'src/base/ftbbox.c',
+    'src/base/ftglyph.c',
+
+    'src/base/ftfntfmt.c',
+    'src/base/ftlcdfil.c',
+
+    'src/bdf/bdf.c',
+    'src/cff/cff.c',
+    'src/cid/type1cid.c',
+    'src/pcf/pcf.c',
+    'src/pfr/pfr.c',
+    'src/sfnt/sfnt.c',
+    'src/truetype/truetype.c',
+    'src/type1/type1.c',
+    'src/type42/type42.c',
+    'src/winfonts/winfnt.c',
+
+    'src/raster/raster.c',
+    'src/smooth/smooth.c',
+
+    'src/autofit/autofit.c',
+
+    'src/gzip/ftgzip.c',
+    'src/lzw/ftlzw.c',
+
+    'src/base/ftbitmap.c',
+    'src/psaux/psaux.c',
+    'src/pshinter/pshinter.c',
+    'src/psnames/psnames.c',
+]
+
+for ft_source in FREETYPE_SOURCES:
+    sources.append(os.path.join('tcod/freetype2', ft_source))
+
+define_macros.append(('FT2_BUILD_LIBRARY', None))
+define_macros.append(('FT_CONFIG_OPTIONS_H', '<tcod/ftoption.h>'))
+define_macros.append(('FT_CONFIG_MODULES_H', '<tcod/ftmodule.h>'))
+# ---
 
 if sys.platform == 'win32':
     libraries += ['User32', 'OpenGL32']
