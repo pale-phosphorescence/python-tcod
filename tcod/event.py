@@ -15,12 +15,26 @@ implied by ``import tcod``.
 
 .. versionadded:: 8.4
 """
+import enum
 from typing import Any, Dict, Mapping, NamedTuple, Optional, Iterator, Tuple
 
 import tcod
 import tcod.event_constants
 from tcod.event_constants import *  # noqa: F4
 from tcod.event_constants import KMOD_SHIFT, KMOD_CTRL, KMOD_ALT, KMOD_GUI
+
+
+class EventType(str, enum.Enum):
+    QUIT = "QUIT"
+    KEYUP = "KEYUP"
+    KEYDOWN = "KEYDOWN"
+    MOUSEMOTION = "MOUSEMOTION"
+    MOUSEBUTTONDOWN = "MOUSEBUTTONDOWN"
+    MOUSEBUTTONUP = "MOUSEBUTTONUP"
+    MOUSEWHEEL = "MOUSEWHEEL"
+    TEXTINPUT = "TEXTINPUT"
+    WINDOWMOVED = "WINDOWMOVED"
+    WINDOWSIZECHANGED = "WINDOWSIZECHANGED"
 
 
 class _ConstantsWithPrefix(Mapping[int, str]):
